@@ -3,23 +3,7 @@ from spacy.tokens import DocBin
 from tqdm import tqdm
 from pathlib import Path
 
-import numpy as np
-
-#trainData = np.loadtxt('my_output/test_dataset_1', dtype='str')
-#with open('my_output/test_dataset_1', 'r') as file:
- #   trainData = file.read().replace('\n', '')
-
-t = [
-          ("An average-sized strawberry has about 200 seeds on its outer surface and are quite edible.",{"entities":[(17,27,"Fruit")]}),
-          ("The outer skin of Guava is bitter tasting and thick, dark green for raw fruits and as the fruit ripens, the bitterness subsides. ",{"entities":[(18,23,"Fruit")]}),
-          ("Grapes are one of the most widely grown types of fruits in the world, chiefly for the making of different wines. ",{"entities":[(0,6,"Fruit")]}),
-          ("Watermelon is composed of 92 percent water and significant amounts of Vitamins and antioxidants. ",{"entities":[(0,10,"Fruit")]}),
-          ("Papaya fruits are usually cylindrical in shape and the size can go beyond 20 inches. ",{"entities":[(0,6,"Fruit")]}),
-          ("Mango, the King of the fruits is a drupe fruit that grows in tropical regions. ",{"entities":[(0,5,"Fruit")]}),
-          ("undefined",{"entities":[(0,6,"Fruit")]}),
-          ("Oranges are great source of vitamin C",{"entities":[(0,7,"Fruit")]}),
-          ("A apple a day keeps doctor away. ",{"entities":[(2,7,"Fruit")]})
-        ]
+#this functionality has to be called via CLI: python -m spacy train config.cfg --output ./output --paths.train ./train.spacy --paths.dev ./train.spacy
 
 trainData = [
     ("Venus fragmented, mobile lithosphere may offer a framework for understanding how tectonics on Earth operated in the Archean.", {"entities":[(0, 5, "UAT")]}),
@@ -42,6 +26,8 @@ trainData = [
     ("Bulk densities are also calculated according to alternative scenarios along with compositional distributions, and results are compared to solar system objects.", {"entities":[(138, 150, "UAT")]})
 ]
 
+print("TEST")
+
 nlp = spacy.blank('en') # load a new spacy model
 db = DocBin() # create a DocBin object
 
@@ -60,4 +46,4 @@ for text, annot in tqdm(trainData): # data in previous format
     except:
         print(text, annot)
 
-db.to_disk(Path.cwd() / 'uat_ner_model.spacy')
+db.to_disk('./train.spacy')
